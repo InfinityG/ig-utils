@@ -1,1 +1,2 @@
-# ig-utils
+# ig-gems
+General repo for gems
