@@ -13,4 +13,4 @@ Gem::Specification.new do |s|
 end
 
 # run 'gem build ig-crypto-utils' to create gem
-# run
+# run 'gem push ig-crypto-utils-0.0.*.gem' to publish

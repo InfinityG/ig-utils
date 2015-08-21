@@ -14,7 +14,10 @@ class AesTests < MiniTest::Test
     plain_text = '{"blah":"Super secret text"}'
     encoded_plain_text = Base64.encode64 plain_text
 
-    aes_256_key = 'ky4xgi0+KvLYmVp1J5akqkJkv8z5rJsHTo9FcBc0hgo='  # already base64 encoded
+    # aes_256_key = 'ky4xgi0+KvLYmVp1J5akqkJkv8z5rJsHTo9FcBc0hgo='  # already base64 encoded
+    # aes_256_key = CryptoUtils.create_digest 'supersecret key'
+    aes_256_key = util.generate_random_encoded_aes_key
+    puts 'Generated AES key: ' + aes_256_key
 
     # encrypt
     encrypted_result = util.encrypt encoded_plain_text, aes_256_key
@@ -24,4 +27,5 @@ class AesTests < MiniTest::Test
 
     assert decrypted_result == encoded_plain_text
   end
+
 end

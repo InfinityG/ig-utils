@@ -19,6 +19,10 @@ module ValidatorUtils
 
     def self.validate_integer(value)
       Float(value) != nil rescue false
+      end
+
+    def self.validate_boolean(value)
+      !!value == value
     end
 
     def self.validate_uuid(value)
@@ -59,6 +63,14 @@ module ValidatorUtils
     # validates base64 encoding (includes newline constants '\n')
     def self.validate_base_64(value)
       value =~ /^[A-Za-z0-9+\/=\\]+={0,3}$/
+    end
+
+    def self.validate_uri(value)
+      value =~ /^(http|https):\/\/[a-z0-9]+([\-\.][a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/
+    end
+
+    def self.validate_email(value)
+      value =~ /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/
     end
   end
 end

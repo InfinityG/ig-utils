@@ -9,6 +9,9 @@ class EcdsaTests < MiniTest::Test
   def test_create_key_pair
     result = CryptoUtils::EcdsaUtil.new.create_key_pair
 
+    puts('Generated public key: ' + result[:pk])
+    puts('Generated secret key: ' + result[:sk])
+
     assert result[:pk]!= nil
     assert result[:sk]!= nil
   end

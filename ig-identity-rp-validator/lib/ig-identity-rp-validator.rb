@@ -19,12 +19,12 @@ module IgIdentity
           decrypted_result = Base64.decode64 CryptoUtils::AesUtil.new.decrypt(auth, aes_key, iv)
           parsed_result = JSON.parse(decrypted_result, :symbolize_names => true)
 
-          token = parsed_result[:token]
+          digest = parsed_result[:digest]
           signature = parsed_result[:signature]
 
           # validate the signature
           return {:valid => true, :auth => parsed_result} if
-              CryptoUtils::EcdsaUtil.new.validate_signature(token, signature, ecdsa_public_key)
+              CryptoUtils::EcdsaUtil.new.validate_signature(digest, signature, ecdsa_public_key)
 
           {:valid => false, auth: nil}
 

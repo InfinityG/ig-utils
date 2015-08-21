@@ -30,6 +30,10 @@ module CryptoUtils
 
   def self.create_digest(value)
     Digest::SHA2.base64digest value
+    end
+
+  def self.create_random_aes_key()
+    Digest::SHA2.base64digest value
   end
 
   #############################
@@ -39,6 +43,13 @@ module CryptoUtils
   class AesUtil
     # https://gist.github.com/byu/99651
     # http://ruby-doc.org/stdlib-1.9.3/libdoc/openssl/rdoc/OpenSSL/Cipher.html
+
+    # use this to generate a random (base64 encoded) AES key if required
+    def generate_random_encoded_aes_key
+      cipher = OpenSSL::Cipher::AES.new(256, :CBC)
+      cipher.encrypt
+      Base64.encode64 cipher.random_key
+    end
 
     def encrypt(encoded_plain_text, encoded_key)
 
