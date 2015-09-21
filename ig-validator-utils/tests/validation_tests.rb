@@ -71,11 +71,17 @@ class ValidationTests < MiniTest::Test
   end
 
   def test_mobile_pass
-    numbers = ['+27 12345678', '+2712345678', '+44 9987654324', '+449987654324', '0823456789']
+    numbers = ['+27 12345678', '+2712345678', '+44 9987654324', '+449987654324']
     numbers.each do |number|
       assert ValidatorUtils::GeneralValidator.validate_mobile(number)
     end
+  end
 
+  def test_mobile_fail
+    numbers = ['012345678', '0712345678', '9987654324', '+44998765432490809809809980']
+    numbers.each do |number|
+      assert !ValidatorUtils::GeneralValidator.validate_mobile(number)
+    end
   end
 
 end

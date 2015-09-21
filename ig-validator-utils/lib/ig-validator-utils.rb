@@ -73,8 +73,9 @@ module ValidatorUtils
       value =~ /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/
       end
 
+    # accepts only numbers with international codes in the format +12 12345678
     def self.validate_mobile(value)
-      value =~ /^(\+\d{1,3}[- ]?)?\d{8,10}$/
+      value =~ /^(\+\d{1,3}[- ]?)\d{8,12}$/
     end
   end
 end
