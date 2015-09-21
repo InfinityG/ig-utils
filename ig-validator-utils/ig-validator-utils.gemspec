@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'ig-validator-utils'
-  s.version     = '0.0.3'
-  s.date        = '2015-07-20'
+  s.version     = '0.0.6'
+  s.date        = '2015-09-21'
   s.summary     = 'General field validator'
   s.description = 'General validator for request data'
   s.authors     = ['Infinity-G']
