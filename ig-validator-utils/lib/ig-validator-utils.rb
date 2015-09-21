@@ -71,6 +71,10 @@ module ValidatorUtils
 
     def self.validate_email(value)
       value =~ /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/
+      end
+
+    def self.validate_mobile(value)
+      value =~ /^(\+\d{1,3}[- ]?)?\d{8,10}$/
     end
   end
 end
