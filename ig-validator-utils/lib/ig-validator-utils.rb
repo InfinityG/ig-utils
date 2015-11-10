@@ -12,14 +12,27 @@ module ValidatorUtils
     end
 
     # \p{L} matches a single unicode letter
-    # also allows points, apostrophe and hyphen
+    # also allows space, points, apostrophe and hyphen
     def self.validate_string_strict(value)
       value =~ /^[\p{L} .'-]+$/i
+      end
+
+    # \p{L} matches a single unicode letter
+    # \p{N} matches a single unicode number
+    # allow points, comma, apostrophe, hyphen, spaces
+    def self.validate_address(value)
+      value =~ /^[\p{L}\p{N} .,'-]+$/i
+    end
+
+    # \p{L} matches a single unicode letter
+    # \p{N} matches a single unicode number
+    def self.validate_alpha_numeric(value)
+      value =~ /^[\p{L}\p{N}]+$/i
     end
 
     def self.validate_integer(value)
       Float(value) != nil rescue false
-      end
+    end
 
     def self.validate_boolean(value)
       !!value == value
@@ -37,9 +50,16 @@ module ValidatorUtils
     # At least one lower case letter
     # At least one digit
     # Minimum 6 in length
-    # Maximum 12 in length
+    # Maximum 20 in length
     def self.validate_password(value)
-      value =~ /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,12}$/
+      value =~ /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,20}$/
+    end
+
+    # Match any non-whitespace character
+    # Minimum 6 in length
+    # Maximum 20 in length
+    def self.validate_password_relaxed(value)
+      value =~ /^\S{6,20}$/
     end
 
     # for a 256-bit ECDSA curve, the uncompressed pubkey is 512 bits (256 bits of x, 256 bits of y, no sign bit).
@@ -71,11 +91,13 @@ module ValidatorUtils
 
     def self.validate_email(value)
       value =~ /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/
-      end
+    end
 
     # accepts only numbers with international codes in the format +12 12345678
     def self.validate_mobile(value)
-      value =~ /^(\+\d{1,3}[- ]?)\d{8,12}$/
+      # strip out spaces first
+      stripped = value.split.join
+      stripped =~ /^(\+\d{1,3}[-]?)\d{8,12}$/
     end
   end
 end

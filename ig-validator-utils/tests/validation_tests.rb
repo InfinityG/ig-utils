@@ -84,4 +84,49 @@ class ValidationTests < MiniTest::Test
     end
   end
 
+  def test_address_pass_1
+    address = '12 ajax way, cape town 2012'
+    assert ValidatorUtils::GeneralValidator.validate_address address
+    end
+
+  def test_address_pass_2
+    address = '12 ajax way, cape-town 2012'
+    assert ValidatorUtils::GeneralValidator.validate_address address
+  end
+
+  def test_address_fail_1
+    address = '12 ajax way, cape town 2012 %'
+    assert !ValidatorUtils::GeneralValidator.validate_address(address)
+  end
+
+  def test_address_fail_2
+    address = '12 ajax way, cape town 2012 >'
+    assert !ValidatorUtils::GeneralValidator.validate_address(address)
+    end
+
+  def test_address_fail_3
+    address = '& 12 ajax way, cape town 2012'
+    assert !ValidatorUtils::GeneralValidator.validate_address(address)
+    end
+
+  def alpha_numeric_pass_1
+    val = 'g1jk2h3gh123jk'
+    assert ValidatorUtils::GeneralValidator.validate_alpha_numeric(val)
+    end
+
+  def alpha_numeric_pass_2
+    val = '131231231231'
+    assert ValidatorUtils::GeneralValidator.validate_alpha_numeric(val)
+    end
+
+  def alpha_numeric_pass_3
+    val = 'jsdhasdkhklsh'
+    assert ValidatorUtils::GeneralValidator.validate_alpha_numeric(val)
+    end
+
+  def alpha_numeric_fail_1
+    val = 'lkjh£33'
+    assert !ValidatorUtils::GeneralValidator.validate_alpha_numeric(val)
+  end
+
 end
