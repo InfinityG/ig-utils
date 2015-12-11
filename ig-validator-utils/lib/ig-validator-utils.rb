@@ -86,7 +86,7 @@ module ValidatorUtils
     end
 
     def self.validate_uri(value)
-      value =~ /^(http|https):\/\/[a-z0-9]+([\-\.][a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/
+      value =~ /^(http|https):\/\/[a-z0-9]+([\-\.][a-z0-9]+)*\.[a-z]{2,13}(:[0-9]{1,5})?(\/.*)?$/
     end
 
     def self.validate_email(value)
